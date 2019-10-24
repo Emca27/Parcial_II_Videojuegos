@@ -1,0 +1,25 @@
+{
+  "name": "tc1021",
+  "private": true,
+  "description": "A simplified bare-bones starter for Gatsby",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build index.html",
+    "develop": "parcel index.html -p 8000",
+    "format": "prettier --write src/**/*.{js,jsx}"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robruizr/tc1021"
+  },
+  "bugs": {
+    "url": "https://github.com/robruizr/tc1021"
+  }
+}
