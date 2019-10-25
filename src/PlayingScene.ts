@@ -1,5 +1,5 @@
 import Scene from "./Scene";
-//import Character from "./Character";
+import Character from "./Character";
 import Engine from "./Engine";
 import MainMenuScene from "./MainMenuScene";
 import Zombie from "./Zombie";
@@ -12,12 +12,13 @@ class PlayingScene extends Scene {
   private enemies:Zombie[] = [];
   private tiempoTotal = 0;
   private spawnTime = 5;
-
+  private player:Character;
 
   public render = () => {
     //this.Zombie.render();
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].render();
+      this.player.render();
     }
   
   };
@@ -40,6 +41,7 @@ class PlayingScene extends Scene {
         this.enemies.push(new Zombie);
         this.tiempoTotal = 0;
       }
+      this.player.update();
   };
 
   public enter = () => {
@@ -47,6 +49,7 @@ class PlayingScene extends Scene {
     for (let i = 0; i < 3; i++) {
       this.enemies.push(new Zombie);
   }
+  this.player = new Character();
 };
 
   public keyUpHandler = (event: KeyboardEvent) => {};
