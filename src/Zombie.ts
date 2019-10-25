@@ -10,6 +10,7 @@ class Zombie {
     private muerto = false;
     private touchPlayer = false;
     private speed = Time.deltaTime * 2;
+    private tiempoAux = 0;
 
     constructor(){
         const { context } = GameContext;
@@ -83,6 +84,12 @@ class Zombie {
 
             this.position[0] = x;
             this.position[1] = y;
+        }
+
+        this.tiempoAux+=Time.deltaTime;
+        if(this.tiempoAux>10)
+        {
+            this.muerto = true;
         }
     }
 
