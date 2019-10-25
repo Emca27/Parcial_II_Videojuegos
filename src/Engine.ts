@@ -35,7 +35,7 @@ class Engine {
 
     context.save();
     context.beginPath();
-    context.fillStyle = "white";
+    context.fillStyle = "black";
     context.fillRect(0, 0, width, height);
 
     context.closePath();

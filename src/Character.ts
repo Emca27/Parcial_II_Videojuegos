@@ -7,8 +7,8 @@ type coords = [number, number];
 
 class Character {
   private position: coords = [0, 0];
-  private characterWidth: number = 4; // Checar tamano 
-  private characterHeight: number = 4;
+  private characterWidth: number = 40; // Checar tamano 
+  private characterHeight: number = 40;
   private lives: number;
 
   //private characterImage: HTMLImageElement = new Image(); //ActualizarImagen
@@ -39,7 +39,7 @@ class Character {
     context.save();
     context.beginPath();
     context.fillStyle = "Red";
-    context.rect(xPos, yPos, this.characterWidth, this.characterWidth);
+    context.fillRect(xPos, yPos, this.characterWidth, this.characterWidth);
     context.closePath();
     context.restore();
   };
