@@ -9,6 +9,7 @@ class Zombie {
     private color = "Green";
     private muerto = false;
     private touchPlayer = false;
+    private speed = Time.deltaTime * 2;
 
     constructor(){
         const { context } = GameContext;
@@ -58,10 +59,10 @@ class Zombie {
                 x = x ;
             }else if (x > width/2)
             {
-                x = x - (scale*Time.deltaTime);
+                x = x - (scale*this.speed);
             }else if (x < width/2)
             {
-                x = (scale*Time.deltaTime) + x;
+                x = (scale*this.speed) + x;
             }
 
             if(y == height/2)
@@ -69,10 +70,10 @@ class Zombie {
                 y = y;
             }else if(y > height/2)
             {
-                y = y - (scale*Time.deltaTime);
+                y = y - (scale*this.speed);
             }else if(y < height/2)
             {
-                y = y + (scale*Time.deltaTime);
+                y = y + (scale*this.speed);
             }
 
             if((x== width/2) && (y == height/2))
