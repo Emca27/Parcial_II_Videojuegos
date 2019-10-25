@@ -86,11 +86,6 @@ class Zombie {
             this.position[1] = y;
         }
 
-        this.tiempoAux+=Time.deltaTime;
-        if(this.tiempoAux>10)
-        {
-            this.muerto = true;
-        }
     }
 
     public restarVida = () =>{
