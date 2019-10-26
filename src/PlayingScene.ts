@@ -23,33 +23,40 @@ class PlayingScene extends Scene {
   
   };
   public update = () => {
-    //this.Zombie.update();
-    for (let i = 0; i < this.enemies.length; i++) {
-      this.enemies[i].update();
-    }
-    //Ciclo para revisar si estan muertos
-    for (let i = 0; i < this.enemies.length; i++) {
-      if(this.enemies[i].zombieMuerto()==true){
-        delete(this.enemies[i]);
-      }
-    }
-    
 
     this.tiempoTotal+=Time.deltaTime;
     if(this.tiempoTotal>this.spawnTime)
       {
-        this.enemies.push(new Zombie);
+        this.enemies.push(new Zombie(this.player));
         this.tiempoTotal = 0;
       }
-      this.player.update();
+
+
+    //this.Zombie.update();
+    for (let i = 0; i < this.enemies.length; i++) {
+      this.enemies[i].update();
+    }
+    this.player.update();
+
+    //Ciclo para revisar si estan muertos
+    
+      this.enemies = this.enemies.filter(Zombie=>!Zombie.zombieMuerto());
+      
+
+    if(this.player.cuantasVidas()==0)
+    {
+     //delete(this.player);
+     this.player.setColor("blue");
+    }
   };
 
   public enter = () => {
     //this.Zombie = new Zombie();
-    for (let i = 0; i < 3; i++) {
-      this.enemies.push(new Zombie);
+    this.player = new Character();
+    for (let i = 0; i < 2; i++) {
+      this.enemies.push(new Zombie(this.player));   
   }
-  this.player = new Character();
+ 
 };
 
   public keyUpHandler = (event: KeyboardEvent) => {};

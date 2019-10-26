@@ -9,7 +9,8 @@ class Character {
   private position: coords = [0, 0];
   private characterWidth: number = 40; // Checar tamano 
   private characterHeight: number = 40;
-  private lives: number;
+  private lives: number = 0;
+  private color = "white";
 
   //private characterImage: HTMLImageElement = new Image(); //ActualizarImagen
 
@@ -26,6 +27,22 @@ class Character {
   }
 
 
+  public restarVida = () => {
+
+    this.lives = this.lives - 1; 
+  }
+
+  public cuantasVidas = () => {
+
+    return this.lives; 
+  }
+
+  public setColor(newcolor)
+  {
+    this.color = newcolor;
+  }
+
+
 
   public update = () => {
   };
@@ -38,7 +55,7 @@ class Character {
 
     context.save();
     context.beginPath();
-    context.fillStyle = "Red";
+    context.fillStyle = this.color;
     context.fillRect(xPos, yPos, this.characterWidth, this.characterWidth);
     context.closePath();
     context.restore();
