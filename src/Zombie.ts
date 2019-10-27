@@ -1,19 +1,30 @@
 import GameContext from "./GameContext";
 import Time from "./Time";
 import Character from "./Character";
+import spritesheet from "/assets/zombie-SWEN.png";
+import audio from "/assets/4.mp3" 
+
+
+const sound = new Audio(audio);
 
 
 class Zombie {
 
     private position = [0,0];
-    private zombieWidth: number = 4;
-    private zombieHeight: number = 4;
+    private zombieWidth: number = 60;
+    private zombieHeight: number = 60;
     private color = "Green";
     private muerto = false;
     //private touchPlayer = false;
     private refJugador:Character = null;
-    private speed = Time.deltaTime * 2;
+    //private speed = Time.deltaTime * 1.5;
+    private speed = 1.5;
+
+
     private tiempoAux = 0;
+    private frameCounter = 0;
+    private currentFrame = 0;
+    private characterImage: HTMLImageElement = new Image();
 
     constructor(refJugador:Character){
         this.refJugador = refJugador;
@@ -22,6 +33,7 @@ class Zombie {
         const { width, height } = context.canvas;
        const rand = Math.floor(Math.random() * 4);
        this.muerto = false;
+       this.characterImage.src = spritesheet;
        //this.touchPlayer = false;
         
        switch (rand){
@@ -64,10 +76,10 @@ class Zombie {
                 x = x ;
             }else if (x > width/2)
             {
-                x = x - (scale*this.speed);
+                x = x - (scale*this.speed*Time.deltaTime);
             }else if (x < width/2)
             {
-                x = (scale*this.speed) + x;
+                x = (scale*this.speed*Time.deltaTime) + x;
             }
 
             if(y == height/2)
@@ -75,10 +87,10 @@ class Zombie {
                 y = y;
             }else if(y > height/2)
             {
-                y = y - (scale*this.speed);
+                y = y - (scale*this.speed*Time.deltaTime);
             }else if(y < height/2)
             {
-                y = y + (scale*this.speed);
+                y = y + (scale*this.speed*Time.deltaTime);
             }
 
             //x >  pos[0] && x < pos[0] + 100 && y > pos[1] && y < pos[1] + 100)
@@ -89,19 +101,27 @@ class Zombie {
             if(x < jx + scale && x + scale > jx &&
              y > jy - scale && y - scale < jy)
             {
+               // this.refJugador.setColor("blue");
                 this.refJugador.restarVida();
                 this.muerto = true;
+                sound.play();
             }
 
             this.position[0] = x;
             this.position[1] = y;
         }
 
+        if (this.frameCounter % 2 === 0) {
+            this.currentFrame = (this.currentFrame + 1) % 3;
+          }
+          this.frameCounter += 1;
+
     }
 
     public restarVida = () =>{
         //return this.touchPlayer;
         this.refJugador.restarVida();
+       
     }
 
     public zombieMuerto = () =>{
@@ -112,10 +132,25 @@ class Zombie {
         const context = GameContext.context;
         const scale = GameContext.scale;
         const [x, y] = this.position;
+        const paddingY = 4;
+        const paddingX = 50;
+        const spriteHeight = 70;
+        const spriteWidth = 52;
         context.save();
         context.beginPath();
         context.fillStyle = this.color;
-        context.fillRect(x, y, scale, scale);
+       // context.fillRect(x, y, scale, scale);
+       context.drawImage(
+        this.characterImage,
+        this.currentFrame * (spriteWidth + paddingX),
+        paddingY,
+        spriteWidth,
+        spriteHeight,
+        x,
+        y,
+        this.zombieWidth,
+        this.zombieHeight
+      );
         context.closePath();
         context.restore();
     };

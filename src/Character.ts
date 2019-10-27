@@ -1,7 +1,7 @@
 import GameContext from "./GameContext";
 //import Time from "./Time";
 // @ts-ignore
-//import spritesheet from "/assets/spritesheet.png";
+import spritesheet from "/assets/spritesheet.png";
 
 type coords = [number, number];
 
@@ -11,13 +11,16 @@ class Character {
   private characterHeight: number = 40;
   private lives: number = 0;
   private color = "white";
+  private frameCounter = 0;
+  private currentFrame = 0;
+  private characterImage: HTMLImageElement = new Image();
 
   //private characterImage: HTMLImageElement = new Image(); //ActualizarImagen
 
   constructor() {
     const { context } = GameContext;
     const { width, height } = context.canvas;
-   // this.characterImage.src = spritesheet;
+    this.characterImage.src = spritesheet;
 
     this.position = [
       (width - this.characterWidth) / 2,
@@ -45,6 +48,10 @@ class Character {
 
 
   public update = () => {
+    if (this.frameCounter % 2 === 0) {
+      this.currentFrame = (this.currentFrame + 1) % 15;
+    }
+    this.frameCounter += 1;
   };
 
   public render = () => {
@@ -52,11 +59,26 @@ class Character {
     let [xPos, yPos] = this.position;
     xPos = context.canvas.width / 2;
     yPos = context.canvas.height / 2;
+    const paddingY = 4;
+    const paddingX = 56.8;
+    const spriteHeight = 85;
+    const spriteWidth = 52;
 
     context.save();
     context.beginPath();
     context.fillStyle = this.color;
-    context.fillRect(xPos, yPos, this.characterWidth, this.characterWidth);
+    //context.fillRect(xPos, yPos, this.characterWidth, this.characterWidth);
+    context.drawImage(
+      this.characterImage,
+      this.currentFrame * (spriteWidth + paddingX),
+      paddingY,
+      spriteWidth,
+      spriteHeight,
+      xPos,
+      yPos,
+      this.characterWidth,
+      this.characterHeight
+    );
     context.closePath();
     context.restore();
   };
