@@ -1,7 +1,9 @@
 import Scene from "./Scene";
+import GameContext from "./GameContext";
 import Character from "./Character";
 import Engine from "./Engine";
 import MainMenuScene from "./MainMenuScene";
+import GameOverScene from "./GameOverScene";
 import Zombie from "./Zombie";
 import Time from "./Time";
 import audio from "/assets/Recall of the Shadows.mp3" 
@@ -22,17 +24,35 @@ class PlayingScene extends Scene {
   private spawnTime = 5;
   private player:Character;
   private pause  = false;
+  private gameover = false;
 
   public render = () => {
+    const context = GameContext.context;
+    const width = context.canvas.width;
+    const height = context.canvas.height;
     //this.Zombie.render();
     this.player.render();
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].render();
     }
+
+    if(this.gameover)
+    {
+    context.save();
+    context.beginPath();
+    context.textAlign = "right";
+    context.fillStyle = "green";
+    context.font = "25px sans-serif";
+    context.strokeStyle = "gold";
+    context.lineWidth = 2;
+    context.fillText("  U ded, press enter",width-10,height/2);
+    context.closePath();
+    context.restore();
+    }
   
   };
   public update = () => {
-    if(!this.pause)
+    if(!this.pause&&!this.gameover)
     {
       sound.play();
      this.tiempoTotal+=Time.deltaTime;
@@ -60,7 +80,8 @@ class PlayingScene extends Scene {
       {
       //delete(this.player);
       soundMuerto.play();
-      this.player.setColor("blue");
+      //this.player.setColor("blue");
+      this.gameover = true;
       }
     }
   };
@@ -74,6 +95,8 @@ class PlayingScene extends Scene {
  
 };
 
+
+
   public keyUpHandler = (event: KeyboardEvent) => {};
   public keyDownHandler = (event: KeyboardEvent, engine: Engine) => {const { key } = event;
   if(key==="Escape"){
@@ -83,6 +106,11 @@ class PlayingScene extends Scene {
   {
     this.pause = !this.pause;
     sound.pause();
+  }
+
+  else if (key==="Enter"&&this.gameover)
+  {
+    engine.setCurrentScene(new GameOverScene());
   }
 };
   
