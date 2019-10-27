@@ -5,8 +5,12 @@ import MainMenuScene from "./MainMenuScene";
 import Zombie from "./Zombie";
 import Time from "./Time";
 import audio from "/assets/Recall of the Shadows.mp3" 
+import audioMuerto from "/assets/2.mp3" 
+
+
 
 const sound = new Audio(audio);
+const soundMuerto = new Audio(audioMuerto);
 
 
 
@@ -55,6 +59,7 @@ class PlayingScene extends Scene {
       if(this.player.cuantasVidas()<1)
       {
       //delete(this.player);
+      soundMuerto.play();
       this.player.setColor("blue");
       }
     }

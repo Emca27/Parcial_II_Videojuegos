@@ -2,7 +2,7 @@ import GameContext from "./GameContext";
 import Time from "./Time";
 import Character from "./Character";
 import spritesheet from "/assets/zombie-SWEN.png";
-import audio from "/assets/4.mp3" 
+import audio from "/assets/qubodupRatAttack.flac" 
 
 
 const sound = new Audio(audio);

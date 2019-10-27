@@ -12,10 +12,12 @@ class MainMenuScene extends Scene {
     context.save();
     context.beginPath();
     context.textAlign = "right";
-    context.fillStyle = "teal";
+    context.fillStyle = "green";
     context.font = "25px sans-serif";
-    context.strokeStyle = "purple";
+    context.strokeStyle = "gold";
     context.lineWidth = 2;
+
+    context.fillText("Whac-A-Zombie",width/2,height/2);
 
     for (let i = 0 ; i < this.options.length; i++){
       if(i === this.currentOption){
