@@ -21,7 +21,7 @@ class GameOverScene extends Scene {
     context.strokeStyle = "gold";
     context.lineWidth = 2;
 
-    context.fillText("GAME OVER",width/2,height/2);
+    context.fillText("GAME OVER, press escape",width/2,height/2);
 
 
     context.closePath();
