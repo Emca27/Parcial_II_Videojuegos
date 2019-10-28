@@ -3,6 +3,7 @@ import Time from "./Time";
 import Scene from "./Scene";
 import PlayingScene from "./PlayingScene";
 import MainMenuScene from "./MainMenuScene";
+import GameOverScene from "./GameOverScene";
 
 class Engine {
   private currentScene: Scene = null;
@@ -57,6 +58,21 @@ class Engine {
 
     requestAnimationFrame(this.tick);
   };
+  public mouseDown = ( event:MouseEvent) => {
+    this.currentScene.mouseDown(event);
+  }
+
+  public mouseUp = (event:MouseEvent) => {
+    this.currentScene.mouseUp(event);
+  }
+
+  public mouseMove = (event:MouseEvent) => {
+    this.currentScene.mouseMove(event);
+  }
+
+  public mouseOut = (event:MouseEvent) => {
+    this.currentScene.mouseOut(event);
+  }
 }
 
 export default Engine;
