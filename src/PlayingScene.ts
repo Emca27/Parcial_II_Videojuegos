@@ -8,8 +8,17 @@ import Zombie from "./Zombie";
 import Time from "./Time";
 import audio from "/assets/Recall of the Shadows.mp3" 
 import audioMuerto from "/assets/2.mp3" 
+<<<<<<< HEAD
 import score from "./Score";
 import Score from "./Score";
+=======
+
+
+
+const sound = new Audio(audio);
+const soundMuerto = new Audio(audioMuerto);
+
+>>>>>>> 2d31056c04e5e5ed29e11c67fb3f7897ef8122ec
 
 
 
@@ -104,6 +113,8 @@ class PlayingScene extends Scene {
       this.enemies.push(new Zombie(this.player));   
     }
   };
+
+
 
 
 
