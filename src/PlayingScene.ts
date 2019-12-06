@@ -129,17 +129,9 @@ class PlayingScene extends Scene {
 };
   public mouseDown = ( event:MouseEvent) => {
     this.press = true;
-  }
-
-  public mouseUp = (event:MouseEvent) => {
-    this.press = false;
-  }
-
-  public mouseMove = (event:MouseEvent) => {
-    //Mueve el mouse hacia los zombies 
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < 4; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
         this.enemies[i].cambiarMuerto(true);
@@ -147,6 +139,14 @@ class PlayingScene extends Scene {
         score.increaseScorePlayer();
       }
     }
+  }
+
+  public mouseUp = (event:MouseEvent) => {
+    this.press = false;
+  }
+
+  public mouseMove = (event:MouseEvent) => {
+    //mazo
   }
 
   public mouseOut = (event:MouseEvent) => {
