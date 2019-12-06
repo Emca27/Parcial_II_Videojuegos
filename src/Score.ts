@@ -6,7 +6,8 @@ class Score {
   private static readonly scoreIncrement: number = 20;
 
   public static restarVida = () => {
-    Score.vidas = Score.vidas - 1;
+    if(Score.vidas != 0)
+      Score.vidas = Score.vidas - 1;
   }
   public static increaseScorePlayer = () => {
     Score.scorePlayer += Score.scoreIncrement;
