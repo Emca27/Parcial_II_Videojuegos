@@ -131,7 +131,7 @@ class PlayingScene extends Scene {
     this.press = true;
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < 4; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
         this.enemies[i].cambiarMuerto(true);
