@@ -10,7 +10,6 @@ class Character {
   private characterWidth: number = 40; // Checar tamano 
   private characterHeight: number = 40;
   private lives: number = 0;
-  private color = "white";
   private frameCounter = 0;
   private currentFrame = 0;
   private characterImage: HTMLImageElement = new Image();
@@ -40,12 +39,6 @@ class Character {
     return this.lives; 
   }
 
-  public setColor(newcolor)
-  {
-    this.color = newcolor;
-  }
-
-
 
   public update = () => {
     if (this.frameCounter % 2 === 0) {
@@ -60,14 +53,12 @@ class Character {
     xPos = context.canvas.width / 2;
     yPos = context.canvas.height / 2;
     const paddingY = 4;
-    const paddingX = 48;
+    const paddingX = 58.6;
     const spriteHeight = 85;
-    const spriteWidth = 28;
+    const spriteWidth = 52;
 
     context.save();
     context.beginPath();
-    context.fillStyle = this.color;
-    //context.fillRect(xPos, yPos, this.characterWidth, this.characterWidth);
     context.drawImage(
       this.characterImage,
       this.currentFrame * (spriteWidth + paddingX),
