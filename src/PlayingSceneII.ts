@@ -69,19 +69,20 @@ class PlayingScene extends Scene {
   };
 
 
+  public  addMoreZombies (iAux: number) {
+    if(Score.getScore() >= 500 * this.multiplicador&&iAux)
+    {
+        this.multiplicador+=1;
+       return this.iAux+=1;
+    }
+    else  return this.iAux;
+}
 
   public update = () => {
     if(!this.pause&&!this.gameover)
     {
         
-        function addMoreZombies (iAux: number) {
-            if(Score.getScore() >= 100 * this.multiplicador)
-            {
-                this.multiplicador+=1;
-               return this.iAux+=1;
-            }
-            else return this.iAux;
-        }
+       this.iAux = this.addMoreZombies(this.iAux);
       this.player.update();
       sound.play();
       this.tiempoTotal+=Time.deltaTime;
@@ -135,7 +136,7 @@ class PlayingScene extends Scene {
     this.press = true;
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < 20; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
         this.enemies[i].cambiarMuerto(true);

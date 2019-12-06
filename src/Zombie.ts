@@ -20,7 +20,7 @@ class Zombie {
     //private touchPlayer = false;
     private refJugador:Character = null;
     //private speed = Time.deltaTime * 1.5;
-    private speed = 1.5;
+    private speed = 0.75;
 
 
     private tiempoAux = 0;
