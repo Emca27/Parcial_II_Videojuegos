@@ -1,7 +1,8 @@
 import GameContext from "./GameContext";
 import Time from "./Time";
 import Character from "./Character";
-import spritesheet from "/assets/zombie-SWEN.jpg";
+import spritesheet1 from "/assets/zombie-SWEN.jpg";
+import spritesheet2 from "/assets/bloody_zombie-NESW.jpg"
 import audio from "/assets/qubodupRatAttack.flac" 
 import Score from "./Score";
 
@@ -27,15 +28,22 @@ class Zombie {
     private currentFrame = 0;
     private characterImage: HTMLImageElement = new Image();
 
-    constructor(refJugador:Character){
+    constructor(refJugador:Character, spritesheetOption:number){
         this.refJugador = refJugador;
         const { context } = GameContext;
         const { scale } = GameContext;
         const { width, height } = context.canvas;
        const rand = Math.floor(Math.random() * 4);
        this.muerto = false;
-       this.characterImage.src = spritesheet;
-       //this.touchPlayer = false;
+       if(spritesheetOption===1)
+       {
+        this.characterImage.src = spritesheet1;
+       }
+
+       else if(spritesheetOption===2)
+       {
+        this.characterImage.src = spritesheet2;
+       }
         
        switch (rand){
             case 0:

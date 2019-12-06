@@ -1,7 +1,7 @@
 import GameContext from "./GameContext";
 
 class Score {
-  private static scorePlayer: number = 0;
+  public static scorePlayer: number = 0;
   private static vidas: number = 3;
   private static readonly scoreIncrement: number = 20;
   private static nuke: boolean = false;
@@ -33,6 +33,10 @@ class Score {
   public static resetVidas = () =>{
     Score.vidas = 3;
   }
+
+    public static getScore = () =>{
+      return Score.scorePlayer;
+      }
 
   public static render = () => {
     const { context } = GameContext;
