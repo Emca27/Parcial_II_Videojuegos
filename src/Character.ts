@@ -14,8 +14,6 @@ class Character {
   private currentFrame = 0;
   private characterImage: HTMLImageElement = new Image();
 
-  //private characterImage: HTMLImageElement = new Image(); //ActualizarImagen
-
   constructor() {
     const { context } = GameContext;
     const { width, height } = context.canvas;
@@ -53,7 +51,7 @@ class Character {
     xPos = context.canvas.width / 2;
     yPos = context.canvas.height / 2;
     const paddingY = 4;
-    const paddingX = 58.6;
+    const paddingX = 56.8;
     const spriteHeight = 85;
     const spriteWidth = 52;
 
