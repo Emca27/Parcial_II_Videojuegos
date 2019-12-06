@@ -8,9 +8,7 @@ import Zombie from "./Zombie";
 import Time from "./Time";
 import audio from "/assets/Recall of the Shadows.mp3" 
 import audioMuerto from "/assets/2.mp3" 
-import score from "./Score";
 import Score from "./Score";
-
 
 
 const sound = new Audio(audio);
@@ -26,6 +24,7 @@ class PlayingScene extends Scene {
   private pause  = false;
   private gameover = false;
   private press: boolean = false;
+  private nextLevel: boolean = false;
 
   public render = () => {
     const context = GameContext.context;
@@ -36,7 +35,6 @@ class PlayingScene extends Scene {
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].render();
     }
-
     if(this.gameover){
       sound.pause();
       context.save();
@@ -46,12 +44,27 @@ class PlayingScene extends Scene {
       context.font = "25px sans-serif";
       context.strokeStyle = "gold";
       context.lineWidth = 2;
-      context.fillText("  U ded",200,100);
+      context.fillText("  YOU LOSE",200,100);
       context.fillText(" Press enter", 200, 350);
       context.closePath();
       context.restore();
     }
-
+/*
+    if(this.nextLevel){
+      sound.pause();
+      context.save();
+      context.beginPath();
+      context.textAlign = "center";
+      context.fillStyle = "red";
+      context.font = "25px sans-serif";
+      context.strokeStyle = "gold";
+      context.lineWidth = 2;
+      context.fillText("  YOU WIN ",200,100);
+      context.fillText(" Press enter", 200, 350);
+      context.closePath();
+      context.restore();
+    }
+*/
     if(this.pause){
       sound.pause();
       context.save();
@@ -66,10 +79,10 @@ class PlayingScene extends Scene {
       context.closePath();
       context.restore();
     }
-
-  
   };
+
   public update = () => {
+    const context = GameContext.context;
     if(!this.pause&&!this.gameover)
     {
       this.player.update();
@@ -110,18 +123,25 @@ class PlayingScene extends Scene {
 
 
   public keyUpHandler = (event: KeyboardEvent) => {};
+
   public keyDownHandler = (event: KeyboardEvent, engine: Engine) => {
     const { key } = event;
     if(key==="Escape"){
       sound.pause();
-      score.resetScore();
+      Score.resetScore();
       Score.resetVidas();
+      Score.resetNuke();
       engine.setCurrentScene(new MainMenuScene());
     }
     else if(key==="p"){
       this.pause = !this.pause;
       sound.pause();
-    }else if (key==="Enter"&&this.gameover){
+    }else if (this.gameover){
+      sound.pause();
+      engine.setCurrentScene(new GameOverScene());
+    }else if(Score.getNuke() && key === "f" && !this.pause){
+     this.nextLevel = true;
+      sound.pause();
       engine.setCurrentScene(new GameOverScene());
     }
 
@@ -131,12 +151,12 @@ class PlayingScene extends Scene {
     this.press = true;
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < 3; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
-        score.increaseScorePlayer();
+        Score.increaseScorePlayer();
       }
     }
   }

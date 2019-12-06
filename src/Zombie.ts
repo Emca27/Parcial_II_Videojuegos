@@ -12,8 +12,8 @@ const sound = new Audio(audio);
 class Zombie {
 
     private position = [0,0];
-    private zombieWidth: number = 60;
-    private zombieHeight: number = 60;
+    private zombieWidth: number = 40;
+    private zombieHeight: number = 40;
     private color = "Green";
     private muerto = false;
     //private touchPlayer = false;
