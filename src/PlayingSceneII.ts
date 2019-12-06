@@ -6,16 +6,15 @@ import MainMenuScene from "./MainMenuScene";
 import GameOverScene from "./GameOverScene";
 import Zombie from "./Zombie";
 import Time from "./Time";
-import audio from "/assets/Recall of the Shadows.mp3" 
+import audio from "/assets/battleThemeA.mp3" 
 import audioMuerto from "/assets/2.mp3" 
-import score from "./Score";
 import Score from "./Score";
+import score from "./Score";
 
 
 
 const sound = new Audio(audio);
 const soundMuerto = new Audio(audioMuerto);
-
 
 
 class PlayingScene extends Scene {
@@ -26,6 +25,8 @@ class PlayingScene extends Scene {
   private pause  = false;
   private gameover = false;
   private press: boolean = false;
+  private iAux: number = 4;
+  private multiplicador: number = 1;
 
   public render = () => {
     const context = GameContext.context;
@@ -65,18 +66,28 @@ class PlayingScene extends Scene {
       context.closePath();
       context.restore();
     }
-
-  
   };
+
+
+
   public update = () => {
     if(!this.pause&&!this.gameover)
     {
+        
+        function addMoreZombies (iAux: number) {
+            if(Score.getScore() >= 100 * this.multiplicador)
+            {
+                this.multiplicador+=1;
+               return this.iAux+=1;
+            }
+            else return this.iAux;
+        }
       this.player.update();
       sound.play();
       this.tiempoTotal+=Time.deltaTime;
       if(this.tiempoTotal>this.spawnTime){
-        for (let i = 0; i < 4; i++) {
-          this.enemies.push(new Zombie(this.player,1));
+        for (let i = 0; i <this.iAux; i++) {
+          this.enemies.push(new Zombie(this.player,2));
         }   
         this.tiempoTotal = 0;
       }
@@ -88,24 +99,18 @@ class PlayingScene extends Scene {
       this.enemies = this.enemies.filter(Zombie=>!Zombie.zombieMuerto());
 
       if(this.player.cuantasVidas()<1){
-        //delete(this.player);
         soundMuerto.play();
-        //this.player.setColor("blue");
         this.gameover = true;
       }
     }
   };
 
   public enter = () => {
-    //this.Zombie = new Zombie();
     this.player = new Character();
     for (let i = 0; i < 2; i++) {
-      this.enemies.push(new Zombie(this.player,1));   
+      this.enemies.push(new Zombie(this.player,2));   
     }
   };
-
-
-
 
 
   public keyUpHandler = (event: KeyboardEvent) => {};
