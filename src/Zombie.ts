@@ -1,7 +1,7 @@
 import GameContext from "./GameContext";
 import Time from "./Time";
 import Character from "./Character";
-import spritesheet from "/assets/zombie-SWEN.png";
+import spritesheet from "/assets/zombie-SWEN.jpg";
 import audio from "/assets/qubodupRatAttack.flac" 
 import Score from "./Score";
 
@@ -134,10 +134,10 @@ class Zombie {
         const context = GameContext.context;
         const scale = GameContext.scale;
         const [x, y] = this.position;
-        const paddingY = 4;
-        const paddingX = 50;
-        const spriteHeight = 70;
-        const spriteWidth = 52;
+        const paddingY = 0;
+        const paddingX = 23;
+        const spriteHeight = 60;
+        const spriteWidth = 25.3;
         context.save();
         context.beginPath();
         context.fillStyle = this.color;

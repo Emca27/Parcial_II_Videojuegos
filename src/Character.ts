@@ -60,9 +60,9 @@ class Character {
     xPos = context.canvas.width / 2;
     yPos = context.canvas.height / 2;
     const paddingY = 4;
-    const paddingX = 56.8;
+    const paddingX = 48;
     const spriteHeight = 85;
-    const spriteWidth = 52;
+    const spriteWidth = 28;
 
     context.save();
     context.beginPath();
