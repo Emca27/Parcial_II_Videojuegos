@@ -153,7 +153,7 @@ class PlayingScene extends Scene {
     let mouseY = event.offsetY;
     for(let i = 0; i < 3; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
-      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
+      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause && !this.gameover){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
         Score.increaseScorePlayer();
@@ -166,7 +166,6 @@ class PlayingScene extends Scene {
   }
 
   public mouseMove = (event:MouseEvent) => {
-    //mazo
   }
 
   public mouseOut = (event:MouseEvent) => {
