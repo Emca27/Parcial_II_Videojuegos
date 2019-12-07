@@ -10,6 +10,7 @@ import audio from "/assets/Recall of the Shadows.mp3" ;
 import audioMuerto from "/assets/2.mp3" ;
 import Score from "./Score";
 import PlayingScene2 from "./PlayingSceneII";
+import NextLevelScene from "./NextLevelScene";
 
 
 const sound = new Audio(audio);
@@ -142,7 +143,7 @@ class PlayingScene extends Scene {
     }else if(Score.getNuke() && key === "f" && !this.pause){
      this.nextLevel = true;
       sound.pause();
-      engine.setCurrentScene(new PlayingScene2());
+      engine.setCurrentScene(new NextLevelScene());
     }
 
 
