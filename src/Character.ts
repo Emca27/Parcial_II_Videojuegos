@@ -2,13 +2,15 @@ import GameContext from "./GameContext";
 //import Time from "./Time";
 // @ts-ignore
 import spritesheet from "/assets/spritesheet.png";
+import ssjugador from "/assets/jugador.jpg";
+
 
 type coords = [number, number];
 
 class Character {
   private position: coords = [0, 0];
-  private characterWidth: number = 40;
-  private characterHeight: number = 40;
+  private characterWidth: number = 100; // Checar tamano 
+  private characterHeight: number = 100;
   private lives: number = 0;
   private frameCounter = 0;
   private currentFrame = 0;
@@ -17,7 +19,9 @@ class Character {
   constructor() {
     const { context } = GameContext;
     const { width, height } = context.canvas;
-    this.characterImage.src = spritesheet;
+    //this.characterImage.src = spritesheet;
+    this.characterImage.src = ssjugador;
+
 
     this.position = [
       (width - this.characterWidth) / 2,
@@ -40,7 +44,7 @@ class Character {
 
   public update = () => {
     if (this.frameCounter % 2 === 0) {
-      this.currentFrame = (this.currentFrame + 1) % 15;
+      this.currentFrame = (this.currentFrame + 1) % 5;
     }
     this.frameCounter += 1;
   };
@@ -48,12 +52,14 @@ class Character {
   public render = () => {
     const { context } = GameContext;
     let [xPos, yPos] = this.position;
-    xPos = context.canvas.width / 2;
+    
+    
+    xPos =(context.canvas.width ) / 2;
     yPos = context.canvas.height / 2;
     const paddingY = 4;
-    const paddingX = 56.8;
-    const spriteHeight = 85;
-    const spriteWidth = 52;
+    const paddingX = 8;
+    const spriteHeight = 100;
+    const spriteWidth = 55;
 
     context.save();
     context.beginPath();

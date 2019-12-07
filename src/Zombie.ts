@@ -105,8 +105,8 @@ class Zombie {
             //x >  pos[0] && x < pos[0] + 100 && y > pos[1] && y < pos[1] + 100)
             //if(playerx < edx + scale && playerx + scale > edx
             //&& playery > edy - scale && playery - scale < edy) {
-              let jx = (width-40) / 2;  
-              let jy = (height-40) /2;
+              let jx = ((width-40) / 2)+30;  
+              let jy = ((height-40) /2)+30;
             if(x < jx + scale && x + scale > jx &&
              y > jy - scale && y - scale < jy)
             {
