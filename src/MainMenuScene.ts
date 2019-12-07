@@ -4,6 +4,7 @@ import PlayingScene from "./PlayingScene";
 import GameContext from "./GameContext";
 import score from "./Score";
 import audio from "/assets/mainMenu.mp3"; 
+import instrucciones from "./instrucciones";
 
 const sound = new Audio(audio);
 
@@ -30,13 +31,13 @@ class MainMenuScene extends Scene {
       context.save();
       
       if(i === this.currentOption){
-        context.textAlign = "right"
+        context.textAlign = "center"
         context.font = "25px sans-serif";
         context.fillStyle = "red";
         context.fillText(this.options[i], width / 2, height/ 2 + i * 35);
       }else {
         context.font = "25px sans-serif";
-        context.textAlign = "center"
+        context.textAlign = "left"
         context.fillStyle = "White";
         context.fillText(this.options[i], width / 2, height/ 2 + i * 35);
       }
@@ -72,6 +73,10 @@ class MainMenuScene extends Scene {
       if(this.currentOption===0){
         sound.pause();
       engine.setCurrentScene(new PlayingScene());
+      }else if(this.currentOption === 1){
+
+      }else if(this.currentOption === 2){
+        engine.setCurrentScene(new instrucciones)
       }
       break;
   };
