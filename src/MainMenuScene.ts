@@ -3,6 +3,10 @@ import Engine from "./Engine";
 import PlayingScene from "./PlayingScene";
 import GameContext from "./GameContext";
 import score from "./Score";
+import audio from "/assets/mainMenu.mp3"; 
+
+const sound = new Audio(audio);
+
 class MainMenuScene extends Scene {
   public enter: () => void;
   
@@ -66,13 +70,16 @@ class MainMenuScene extends Scene {
 
     case "Enter":
       if(this.currentOption===0){
+        sound.pause();
       engine.setCurrentScene(new PlayingScene());
       }
       break;
   };
 }
 
-public update = () => {};
+public update = () => {
+  sound.play();
+};
 
 public mouseDown = ( event:MouseEvent) => {}
 
