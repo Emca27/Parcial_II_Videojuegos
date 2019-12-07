@@ -7,7 +7,7 @@ type coords = [number, number];
 
 class Character {
   private position: coords = [0, 0];
-  private characterWidth: number = 40; // Checar tamano 
+  private characterWidth: number = 40;
   private characterHeight: number = 40;
   private lives: number = 0;
   private frameCounter = 0;

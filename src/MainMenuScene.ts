@@ -52,7 +52,7 @@ class MainMenuScene extends Scene {
 
 
   private currentOption = 0;
-  private options = ["Jugar", "Ajustes", "Salir"];
+  private options = ["Oleadas", "Modo Infinito", "Manual de Juego"];
 
   public keyUpHandler = (event: KeyboardEvent) => {};
   public keyDownHandler = (event: KeyboardEvent, engine: Engine) => {
