@@ -10,6 +10,7 @@ import audio from "/assets/battleThemeA.mp3"
 import audioMuerto from "/assets/2.mp3" 
 import Score from "./Score";
 import score from "./Score";
+import End from "./End";
 
 
 
@@ -27,6 +28,7 @@ class PlayingSceneII extends Scene {
   private press: boolean = false;
   private iAux: number = 4;
   private multiplicador: number = 1;
+  private win: boolean = false; 
 
   public render = () => {
     const context = GameContext.context;
@@ -128,8 +130,11 @@ class PlayingSceneII extends Scene {
       sound.pause();
     }else if (key==="Enter"&&this.gameover){
       engine.setCurrentScene(new GameOverScene());
-    }
-
+    } else if(Score.getNuke() && key === "f" && !this.pause){
+    this.win = true;
+     sound.pause();
+     engine.setCurrentScene(new End());
+   }
 
 };
   public mouseDown = ( event:MouseEvent) => {
@@ -138,7 +143,7 @@ class PlayingSceneII extends Scene {
     let mouseY = event.offsetY;
     for(let i = 0; i < 20; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
-      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
+      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause && !this.gameover){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
         score.increaseScorePlayer();
@@ -151,7 +156,6 @@ class PlayingSceneII extends Scene {
   }
 
   public mouseMove = (event:MouseEvent) => {
-    //mazo
   }
 
   public mouseOut = (event:MouseEvent) => {

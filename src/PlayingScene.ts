@@ -50,22 +50,7 @@ class PlayingScene extends Scene {
       context.closePath();
       context.restore();
     }
-/*
-    if(this.nextLevel){
-      sound.pause();
-      context.save();
-      context.beginPath();
-      context.textAlign = "center";
-      context.fillStyle = "red";
-      context.font = "25px sans-serif";
-      context.strokeStyle = "gold";
-      context.lineWidth = 2;
-      context.fillText("  YOU WIN ",200,100);
-      context.fillText(" Press enter", 200, 350);
-      context.closePath();
-      context.restore();
-    }
-*/
+
     if(this.pause){
       sound.pause();
       context.save();
@@ -154,7 +139,7 @@ class PlayingScene extends Scene {
     let mouseY = event.offsetY;
     for(let i = 0; i < 3; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
-      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause){
+      && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause && !this.gameover){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
         Score.increaseScorePlayer();
@@ -167,7 +152,6 @@ class PlayingScene extends Scene {
   }
 
   public mouseMove = (event:MouseEvent) => {
-    //mazo
   }
 
   public mouseOut = (event:MouseEvent) => {

@@ -3,31 +3,32 @@ import Engine from "./Engine";
 import PlayingScene from "./PlayingScene";
 import GameContext from "./GameContext";
 import MainMenuScene from "./MainMenuScene";
-import PlayingSceneII from "./PlayingSceneII";
 import Score from "./Score";
 
 
 
-class NextLevelScene extends Scene {
+class GameOverScene extends Scene {
   public enter: () => void;
   public render = () => {
     const context = GameContext.context;
     const width = context.canvas.width;
     const height = context.canvas.height;
 
-    Score.resetScore();
-    Score.resetNuke();
     context.save();
     context.beginPath();
-    context.textAlign = "center";
-    context.fillStyle = "green";
-    context.font = "50px sans-serif";
+    context.fillStyle = "red";
+    context.font = "30px sans-serif";
     context.strokeStyle = "gold";
-    context.lineWidth = 2;
-
-    context.fillText("YOU SURVIVED ", 200,height/2);
+    context.textAlign = "center";
+    context.fillText( " You survive the ZOMBIES ", width/ 2,height / 4);
     context.font = "20px sans-serif";
-    context.fillText("Press ENTER to move to the next level, ",width/2,height/2 + 100);
+    context.fillText( " You kill:  ", width / 2,height/3);
+    context.fillText((Score.getScore() / 20).toString(), width / 2, height / 3 + 25);
+    context.fillText(" Zombies", width / 2, height / 3 + 50);
+    context.font = "20px sans-serif";
+    context.textAlign = "center";
+    context.fillText("Press ESC ",width/2,height/3 + 200);
+
 
     context.closePath();
     context.restore();
@@ -39,8 +40,8 @@ public keyDownHandler = (event: KeyboardEvent, engine: Engine) => {
 
   const key = event.key;
 
-  if(key==="Enter"){
-    engine.setCurrentScene(new PlayingSceneII());
+  if(key==="Escape"){
+    engine.setCurrentScene(new MainMenuScene());
   }
   }
 public  mouseDown = ( event:MouseEvent) => {}
@@ -49,4 +50,4 @@ public  mouseMove = (event:MouseEvent) => {}
 public  mouseOut = (event:MouseEvent) => {}
 };
 
-export default NextLevelScene;
+export default GameOverScene;
