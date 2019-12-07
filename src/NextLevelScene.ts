@@ -17,6 +17,7 @@ class NextLevelScene extends Scene {
 
     Score.resetScore();
     Score.resetNuke();
+    Score.resetVidas();
     context.save();
     context.beginPath();
     context.textAlign = "center";

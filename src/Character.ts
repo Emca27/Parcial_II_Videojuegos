@@ -16,7 +16,7 @@ class Character {
   private currentFrame = 0;
   private characterImage: HTMLImageElement = new Image();
 
-  constructor() {
+  constructor(cantvidas:number) {
     const { context } = GameContext;
     const { width, height } = context.canvas;
     //this.characterImage.src = spritesheet;
@@ -27,7 +27,15 @@ class Character {
       (width - this.characterWidth) / 2,
       (height - this.characterHeight)/2,
     ];
-    this.lives = 3;
+    if(cantvidas===3)
+    {                
+      this.lives = 3;
+    }
+    else if(cantvidas===1)
+    {
+      this.lives = 1;
+    }
+    
   }
 
 

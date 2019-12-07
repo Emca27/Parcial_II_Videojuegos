@@ -98,9 +98,9 @@ class PlayingScene extends Scene {
 
   public enter = () => {
     //this.Zombie = new Zombie();
-    this.player = new Character();
+    this.player = new Character(3);
     for (let i = 0; i < 2; i++) {
-      this.enemies.push(new Zombie(this.player,1));   
+      this.enemies.push(new Zombie(this.player,1,1));   
     }
   };
 

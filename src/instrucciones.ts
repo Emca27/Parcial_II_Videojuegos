@@ -8,26 +8,29 @@ import MainMenuScene from "./MainMenuScene";
 class instrucciones extends Scene {
     public  render = () => {
         const context = GameContext.context;
-        const canvas = context.canvas;
         context.fillStyle = "yellow";
-        context.font = "25px sans-serif";
+        context.font = "25px Arial";
         context.strokeStyle = "gold";
-        context.lineWidth = 2;
         context.fillText("Manual de Juego",50, 50);
 
         context.textAlign = "left";
         context.fillStyle = "red";
-        context.font = "17x sans-serif";
+        context.font = "20x Arial";
         context.fillText(" Cuidado los Zombies te atacan!",10 , 100);
         context.fillText(" Para defenderte, da click", 10, 150)
         context.fillText(" en los Zombies", 10, 175);
         context.fillText(" Cuando hayas despejado el area ", 10, 225);
         context.fillText(" podras avanzar  al siguiente nivel",10, 250);
+
         context.fillStyle = "yellow";
         context.fillText("MODO SUPERVIVENCIA", 10, 300);
+
         context.fillStyle = "red";
         context.fillText(" Eres el ultimo humano",10,330);
         context.fillText(" Sobrevive... si puedes",10,360);
+
+        context.font = "13px Arial";
+        context.fillText("Presiona ESC para salir", 200,380);
     };
 
     public update = () => {};

@@ -114,9 +114,9 @@ public  randomZombieSpeed () {
   };
 
   public enter = () => {
-    this.player = new Character();
+    this.player = new Character(3);
     for (let i = 0; i < 2; i++) {
-      this.enemies.push(new Zombie(this.player,2));   
+      this.enemies.push(new Zombie(this.player,2,1));   
     }
   };
 

@@ -8,8 +8,7 @@ import Zombie from "./Zombie";
 import Time from "./Time";
 import audio from "/assets/battleThemeA.mp3" 
 import audioMuerto from "/assets/2.mp3" 
-import Score from "./Score";
-import score from "./Score";
+import Score from "./ScoreInfi"
 import End from "./End";
 
 
@@ -28,7 +27,6 @@ class InfiniteScene extends Scene {
   private press: boolean = false;
   private iAux: number = 4;
   private multiplicador: number = 1;
-  private win: boolean = false; 
 
   public render = () => {
     const context = GameContext.context;
@@ -119,9 +117,9 @@ public  randomZombieSpeed () {
   };
 
   public enter = () => {
-    this.player = new Character();
+    this.player = new Character(1);
     for (let i = 0; i < 2; i++) {
-      this.enemies.push(new Zombie(this.player,2));   
+      this.enemies.push(new Zombie(this.player,2,1));   
     }
   };
 
@@ -131,7 +129,7 @@ public  randomZombieSpeed () {
     const { key } = event;
     if(key==="Escape"){
       sound.pause();
-      score.resetScore();
+      Score.resetScore();
       Score.resetVidas();
       engine.setCurrentScene(new MainMenuScene());
     }
@@ -151,7 +149,7 @@ public  randomZombieSpeed () {
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause && !this.gameover){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
-        score.increaseScorePlayer();
+        Score.increaseScorePlayer();
       }
     }
   }
