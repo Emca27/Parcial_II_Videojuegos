@@ -34,18 +34,14 @@ class Score {
     Score.vidas = 3;
   }
 
-    public static getScore = () =>{
-      return Score.scorePlayer;
-      }
-
   public static render = () => {
     const { context } = GameContext;
-    if(Score.scorePlayer > 60){
+    if(Score.scorePlayer > 1000){
       context.save();
       context.beginPath();
       context.fillStyle = "red";
       context.font = "25px Arial";
-      context.fillText("Puntaje: ", 365, 50);
+      context.fillText("Puntaje: ", 350, 50);
       context.fillText(Score.scorePlayer.toString(), 400, 50); 
       context.fillText("Vidas: ", 100, 50);   
       context.fillText(Score.vidas.toString(), 110, 50);  
@@ -61,7 +57,7 @@ class Score {
     context.beginPath();
     context.fillStyle = "red";
     context.font = "25px Arial";
-    context.fillText("Puntaje: ", 365, 50);
+    context.fillText("Puntaje: ", 350, 50);
     context.fillText(Score.scorePlayer.toString(), 400, 50); 
     context.fillText("Vidas: ", 100, 50);   
     context.fillText(Score.vidas.toString(), 110, 50);  

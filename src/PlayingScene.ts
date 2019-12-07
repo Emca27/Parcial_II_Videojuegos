@@ -50,22 +50,7 @@ class PlayingScene extends Scene {
       context.closePath();
       context.restore();
     }
-/*
-    if(this.nextLevel){
-      sound.pause();
-      context.save();
-      context.beginPath();
-      context.textAlign = "center";
-      context.fillStyle = "red";
-      context.font = "25px sans-serif";
-      context.strokeStyle = "gold";
-      context.lineWidth = 2;
-      context.fillText("  YOU WIN ",200,100);
-      context.fillText(" Press enter", 200, 350);
-      context.closePath();
-      context.restore();
-    }
-*/
+
     if(this.pause){
       sound.pause();
       context.save();

@@ -4,6 +4,7 @@ import PlayingScene from "./PlayingScene";
 import GameContext from "./GameContext";
 import MainMenuScene from "./MainMenuScene";
 import PlayingSceneII from "./PlayingSceneII";
+import Score from "./Score";
 
 
 
@@ -14,6 +15,8 @@ class NextLevelScene extends Scene {
     const width = context.canvas.width;
     const height = context.canvas.height;
 
+    Score.resetScore();
+    Score.resetNuke();
     context.save();
     context.beginPath();
     context.textAlign = "center";
@@ -25,7 +28,6 @@ class NextLevelScene extends Scene {
     context.fillText("YOU SURVIVED ", 200,height/2);
     context.font = "20px sans-serif";
     context.fillText("Press ENTER to move to the next level, ",width/2,height/2 + 100);
-
 
     context.closePath();
     context.restore();
