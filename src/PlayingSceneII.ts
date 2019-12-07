@@ -17,7 +17,7 @@ const sound = new Audio(audio);
 const soundMuerto = new Audio(audioMuerto);
 
 
-class PlayingScene extends Scene {
+class PlayingSceneII extends Scene {
   private enemies:Zombie[] = [];
   private tiempoTotal = 0;
   private spawnTime = 5;
@@ -159,4 +159,4 @@ class PlayingScene extends Scene {
   }
 }
 
-export default PlayingScene;
+export default PlayingSceneII;
