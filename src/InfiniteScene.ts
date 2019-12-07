@@ -6,19 +6,19 @@ import MainMenuScene from "./MainMenuScene";
 import GameOverScene from "./GameOverScene";
 import Zombie from "./Zombie";
 import Time from "./Time";
-import audio from "/assets/Recall of the Shadows.mp3" ;
-import audioMuerto from "/assets/2.mp3" ;
+import audio from "/assets/battleThemeA.mp3" 
+import audioMuerto from "/assets/2.mp3" 
 import Score from "./Score";
-import PlayingScene2 from "./PlayingSceneII";
-import NextLevelScene from "./NextLevelScene";
+import score from "./Score";
+import End from "./End";
+
 
 
 const sound = new Audio(audio);
 const soundMuerto = new Audio(audioMuerto);
 
 
-
-class PlayingScene extends Scene {
+class InfiniteScene extends Scene {
   private enemies:Zombie[] = [];
   private tiempoTotal = 0;
   private spawnTime = 5;
@@ -26,7 +26,9 @@ class PlayingScene extends Scene {
   private pause  = false;
   private gameover = false;
   private press: boolean = false;
-  private nextLevel: boolean = false;
+  private iAux: number = 4;
+  private multiplicador: number = 1;
+  private win: boolean = false; 
 
   public render = () => {
     const context = GameContext.context;
@@ -36,6 +38,7 @@ class PlayingScene extends Scene {
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].render();
     }
+
     if(this.gameover){
       sound.pause();
       context.save();
@@ -45,7 +48,7 @@ class PlayingScene extends Scene {
       context.font = "25px sans-serif";
       context.strokeStyle = "gold";
       context.lineWidth = 2;
-      context.fillText("  YOU LOSE",200,100);
+      context.fillText("  U ded",200,100);
       context.fillText(" Press enter", 200, 350);
       context.closePath();
       context.restore();
@@ -67,16 +70,37 @@ class PlayingScene extends Scene {
     }
   };
 
+
+  public  addMoreZombies (iAux: number) {
+    if(Score.getScore() >= 500 * this.multiplicador&&iAux)
+    {
+        this.multiplicador+=1;
+       return this.iAux+=1;
+    }
+    else  return this.iAux;
+}
+    public  randomZombieSkin () {
+        return Math.floor(Math.random() * 2) + 1;  
+}
+
+public  randomZombieSpeed () {
+    return Math.floor(Math.random() * 3) + 1;  
+}
+
   public update = () => {
-    const context = GameContext.context;
     if(!this.pause&&!this.gameover)
     {
+
+        
+       this.iAux = this.addMoreZombies(this.iAux);
       this.player.update();
       sound.play();
       this.tiempoTotal+=Time.deltaTime;
       if(this.tiempoTotal>this.spawnTime){
-        for (let i = 0; i < 4; i++) {
-          this.enemies.push(new Zombie(this.player,1,1));
+        for (let i = 0; i <this.iAux; i++) {
+            var skin = this.randomZombieSkin();
+            var speed = this.randomZombieSpeed();
+          this.enemies.push(new Zombie(this.player,skin,speed));
         }   
         this.tiempoTotal = 0;
       }
@@ -88,61 +112,46 @@ class PlayingScene extends Scene {
       this.enemies = this.enemies.filter(Zombie=>!Zombie.zombieMuerto());
 
       if(this.player.cuantasVidas()<1){
-        //delete(this.player);
         soundMuerto.play();
-        //this.player.setColor("blue");
         this.gameover = true;
       }
     }
   };
 
   public enter = () => {
-    //this.Zombie = new Zombie();
     this.player = new Character();
     for (let i = 0; i < 2; i++) {
-      this.enemies.push(new Zombie(this.player,1));   
+      this.enemies.push(new Zombie(this.player,2));   
     }
   };
 
 
-
-
-
   public keyUpHandler = (event: KeyboardEvent) => {};
-
   public keyDownHandler = (event: KeyboardEvent, engine: Engine) => {
     const { key } = event;
     if(key==="Escape"){
       sound.pause();
-      Score.resetScore();
+      score.resetScore();
       Score.resetVidas();
-      Score.resetNuke();
       engine.setCurrentScene(new MainMenuScene());
     }
     else if(key==="p"){
       this.pause = !this.pause;
       sound.pause();
-    }else if (this.gameover){
-      sound.pause();
+    }else if (key==="Enter"&&this.gameover){
       engine.setCurrentScene(new GameOverScene());
-    }else if(Score.getNuke() && key === "f" && !this.pause){
-     this.nextLevel = true;
-      sound.pause();
-      engine.setCurrentScene(new NextLevelScene());
-    }
-
-
+    } 
 };
   public mouseDown = ( event:MouseEvent) => {
     this.press = true;
     let mouseX = event.offsetX;
     let mouseY = event.offsetY;
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < 20; i++){
       if(mouseX > this.enemies[i].getPositionx() && mouseX < this.enemies[i].getPositionx() + 40 
       && mouseY > this.enemies[i].getPositiony() && mouseY < this.enemies[i].getPositiony() + 40 && this.press && !this.pause && !this.gameover){
         this.enemies[i].cambiarMuerto(true);
         this.enemies = this.enemies.filter(Zombie => !Zombie.zombieMuerto());
-        Score.increaseScorePlayer();
+        score.increaseScorePlayer();
       }
     }
   }
@@ -159,4 +168,4 @@ class PlayingScene extends Scene {
   }
 }
 
-export default PlayingScene;
+export default InfiniteScene;

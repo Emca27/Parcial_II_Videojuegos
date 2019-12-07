@@ -80,6 +80,10 @@ class PlayingSceneII extends Scene {
     else  return this.iAux;
 }
 
+public  randomZombieSpeed () {
+  return Math.floor(Math.random() * 2) + 1;  
+}
+
   public update = () => {
     if(!this.pause&&!this.gameover)
     {
@@ -90,7 +94,8 @@ class PlayingSceneII extends Scene {
       this.tiempoTotal+=Time.deltaTime;
       if(this.tiempoTotal>this.spawnTime){
         for (let i = 0; i <this.iAux; i++) {
-          this.enemies.push(new Zombie(this.player,2));
+          var speed = this.randomZombieSpeed();
+          this.enemies.push(new Zombie(this.player,2,speed));
         }   
         this.tiempoTotal = 0;
       }

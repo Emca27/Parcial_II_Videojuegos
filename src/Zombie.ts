@@ -20,7 +20,7 @@ class Zombie {
     //private touchPlayer = false;
     private refJugador:Character = null;
     //private speed = Time.deltaTime * 1.5;
-    private speed = 0.75;
+    private speed = 0.75; //0.75 facil, 1.5 med, 2 perro
 
 
     private tiempoAux = 0;
@@ -28,7 +28,7 @@ class Zombie {
     private currentFrame = 0;
     private characterImage: HTMLImageElement = new Image();
 
-    constructor(refJugador:Character, spritesheetOption:number){
+    constructor(refJugador:Character, spritesheetOption:number, speedOption: number){
         this.refJugador = refJugador;
         const { context } = GameContext;
         const { scale } = GameContext;
@@ -43,6 +43,20 @@ class Zombie {
        else if(spritesheetOption===2)
        {
         this.characterImage.src = spritesheet2;
+       }
+
+       switch(speedOption){
+            case 1:
+                this.speed = 0.75;
+                break;
+            
+            case 2:
+                this.speed = 1.5;
+                break;
+
+            case 3:
+                this.speed = 2;
+                break;
        }
         
        switch (rand){

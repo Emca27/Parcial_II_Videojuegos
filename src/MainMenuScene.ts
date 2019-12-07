@@ -4,6 +4,7 @@ import PlayingScene from "./PlayingScene";
 import GameContext from "./GameContext";
 import score from "./Score";
 import audio from "/assets/mainMenu.mp3"; 
+import InfiniteScene from "./InfiniteScene";
 
 const sound = new Audio(audio);
 
@@ -72,6 +73,10 @@ class MainMenuScene extends Scene {
       if(this.currentOption===0){
         sound.pause();
       engine.setCurrentScene(new PlayingScene());
+      }
+      else if(this.currentOption===1){
+        sound.pause();
+        engine.setCurrentScene(new InfiniteScene());
       }
       break;
   };
